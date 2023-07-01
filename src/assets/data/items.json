@@ -1,0 +1,64 @@
+[
+  {
+    "id": 1,
+    "name": "Desktop",
+    "children": [
+      {
+        "id": 2,
+        "name": "Resume"
+      },
+      {
+        "name": "Cover Letter",
+        "id": 3,
+        "children": [
+          {
+            "id": 4,
+            "name": "Short Video"
+          },
+          {
+            "id": 5,
+            "name": "Excel Optimisation"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Hard Drive",
+    "children": [
+      {
+        "id": 7,
+        "name": "Remote Time-Sheet"
+      },
+      {
+        "id": 8,
+        "name": "Monthly Budget"
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "name": "Folders",
+    "children": [
+      {
+        "id": 10,
+        "name": "Documents",
+        "children": [
+          {
+            "id": 11,
+            "name": "Pictures"
+          },
+          {
+            "id": 12,
+            "name": "Videos"
+          }
+        ]
+      },
+      {
+        "id": 13,
+        "name": "Repositories"
+      }
+    ]
+  }
+]
