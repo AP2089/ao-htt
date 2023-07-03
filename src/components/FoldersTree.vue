@@ -1,4 +1,5 @@
 <script setup>
+import { ref } from 'vue';
 import Tree from 'vue3-tree-vue';
 import 'vue3-tree-vue/dist/style.css';
 
@@ -21,8 +22,12 @@ const emits = defineEmits([
   'hide'
 ]);
 
-const selectFolder = id => {
-  emits('select', id);
+const selectedItem = ref({});
+
+const selectFolder = () => {
+  const id = selectedItem.value.id;
+
+  emits('select', id ? id : null);
   emits('hide');
 }
 </script>
@@ -31,31 +36,36 @@ const selectFolder = id => {
   <Modal
     :isShow="isShow"
     @hide="$emit('hide')"
+    class="folders-tree"
   >
     <h2 v-if="title">{{ title }}</h2>
 
     <Tree
       :items="items"
-      :hideGuideLines="true"
-      class="tree"
+      v-model:selectedItem="selectedItem"
+      class="folders-tree__list"
     >
       <template v-slot:item-prepend-icon="treeViewItem">
-        <img src="@/assets/images/icons/folder.svg" alt="folder" class="tree__icon" />
+        <img src="@/assets/images/icons/folder.svg" alt="folder" class="folders-tree__icon" />
       </template>
 
-      <template v-slot:item-prepend="treeViewItem">
-        <ButtonBase
-          size="sm"
-          class="tree__btn"
-          @click="selectFolder(treeViewItem.id)"
-        >Ok</ButtonBase>
-      </template>
     </Tree>
+
+    <div class="folders-tree__foot">
+      <ButtonBase
+        class="folders-tree__btn"
+        @click="selectFolder"
+      >Ok</ButtonBase>
+    </div>
   </Modal>
 </template>
 
 <style lang="scss" scoped>
-.tree {
+.folders-tree {
+  &__list {
+    margin-bottom: 15px;
+  }
+  
   &__icon {
     width: 20px;
     height: 20px;
@@ -63,16 +73,11 @@ const selectFolder = id => {
   }
 
   &__btn {
-    order: 3;
-    margin-left: 5px;
+    min-width: 80px;
   }
+}
 
-  :deep(.pointer) {
-    cursor: default;
-  }
-
-  :deep(.chevron-right) {
-    cursor: pointer;
-  }
+:deep(.selected-tree-item) {
+  background-color: $color-warning;
 }
 </style>
